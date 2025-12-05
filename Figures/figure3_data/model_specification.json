@@ -1,0 +1,45 @@
+[
+  {
+    "features_in_order":[
+      "ncpr_abs_diff",
+      "faro_abs_diff",
+      "N_mean",
+      "ncpr_mean",
+      "mean_lambda_mean",
+      "mean_lambda_abs_diff",
+      "shd_mean",
+      "N_abs_diff"
+    ],
+    "raw_intercept":-1.9998511895,
+    "raw_coefficients":{
+      "ncpr_abs_diff":-24.2702293891,
+      "faro_abs_diff":16.1183816598,
+      "N_mean":0.0246647001,
+      "ncpr_mean":-23.4554032443,
+      "mean_lambda_mean":-27.1200065681,
+      "mean_lambda_abs_diff":14.0666073981,
+      "shd_mean":2.4755464241,
+      "N_abs_diff":-0.0110613224
+    },
+    "feature_definitions":{
+      "mean_lambda_mean":"(mean_lambda_protein1 + mean_lambda_protein2) \/ 2",
+      "scd_mean":"(scd_protein1 + scd_protein2) \/ 2",
+      "n_charged_mean":"(n_charged_protein1 + n_charged_protein2) \/ 2",
+      "N_mean":"(N_protein1 + N_protein2) \/ 2",
+      "faro_mean":"(faro_protein1 + faro_protein2) \/ 2",
+      "ncpr_mean":"(ncpr_protein1 + ncpr_protein2) \/ 2",
+      "kappa_mean":"(kappa_protein1 + kappa_protein2) \/ 2",
+      "shd_mean":"(shd_protein1 + shd_protein2) \/ 2",
+      "mean_lambda_abs_diff":"abs(mean_lambda_protein1 - mean_lambda_protein2)",
+      "scd_abs_diff":"abs(scd_protein1 - scd_protein2)",
+      "n_charged_abs_diff":"abs(n_charged_protein1 - n_charged_protein2)",
+      "N_abs_diff":"abs(N_protein1 - N_protein2)",
+      "faro_abs_diff":"abs(faro_protein1 - faro_protein2)",
+      "ncpr_abs_diff":"abs(ncpr_protein1 - ncpr_protein2)",
+      "kappa_abs_diff":"abs(kappa_protein1 - kappa_protein2)",
+      "shd_abs_diff":"abs(shd_protein1 - shd_protein2)"
+    },
+    "usage":"P(demixing) = sigmoid(intercept + sum(coef_i * feature_i))",
+    "note":"For pipeline: load with joblib.load(), call pipeline.predict_proba(X[features])"
+  }
+]
