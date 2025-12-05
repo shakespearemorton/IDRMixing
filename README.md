@@ -75,42 +75,6 @@ The `figure3_data/` directory contains the trained demixing prediction model:
 ### `Run_MD/`
 Scripts and templates for running CALVADOS2 direct coexistence simulations in OpenMM.
 
-## Quick Start
-
-### Predicting Demixing for New IDR Pairs
-
-```python
-from joblib import load
-import pandas as pd
-
-# Load the trained model
-pipeline = load("Figures/figure3_data/demixing_model_pipeline.joblib")
-
-# Calculate features for your IDR pair (see model_specification.json for definitions)
-# Features: ncpr_mean, ncpr_abs_diff, faro_mean, faro_abs_diff, mean_lambda_mean, 
-#           mean_lambda_abs_diff, N_mean, N_abs_diff, shd_mean, ...
-
-features = ['ncpr_mean', 'ncpr_abs_diff', 'faro_abs_diff', 'N_mean', 
-            'mean_lambda_mean', 'mean_lambda_abs_diff', 'shd_mean', 'N_abs_diff']
-
-X = pd.DataFrame({
-    'ncpr_mean': [(ncpr1 + ncpr2) / 2],
-    'ncpr_abs_diff': [abs(ncpr1 - ncpr2)],
-    # ... other features
-})[features]
-
-demixing_prob = pipeline.predict_proba(X)[:, 1]
-```
-
-### Analyzing Your Own Simulations
-
-```python
-from Analyze_Data.measure_demixing import calculate_demixing_index
-
-# Load your trajectory with voxel-averaged concentrations
-# Returns demixing index D ∈ [0, 1]
-D = calculate_demixing_index(phi1_values, phi2_values, composition_ratio)
-```
 
 ## Requirements
 
@@ -143,7 +107,7 @@ If you use this code or data, please cite:
 ## Related Resources
 
 - [CALVADOS2 Force Field](https://github.com/KULL-Centre/CALVADOS)
-- [von Bülow et al. Dataset](https://github.com/KULL-Centre/_2024_vonBuelow-et-al_LLPhD)
+- [von Bülow et al. Dataset](https://github.com/KULL-Centre/_2024_buelow_PSpred)
 - [IDRome Database](https://github.com/KULL-Centre/_2023_Tesei_IDRome)
 
 ## License
