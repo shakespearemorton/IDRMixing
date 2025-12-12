@@ -185,6 +185,52 @@ def prepare_panel_data(df):
     
     return df_C, df_DE, df_F
 
+def analyze_gin_demixing():
+    """Print top 10 individual GIN groups with lowest median demixing index across all their pairs."""
+    df = load_data()
+    
+    # Apply same filters as Panel C
+    df_filt = df[(df['composition1'] < 95) & (df['composition2'] < 95) & (df['dGij'] < -3)].copy()
+    df_filt = df_filt.dropna(subset=['gin1', 'gin2', 'demixing_composition'])
+    df_filt['interaction_type'] = df_filt.apply(lambda r: get_interaction_type(r['gin1'], r['gin2']), axis=1)
+    df_filt = df_filt[df_filt['interaction_type'] != 'Other']
+    df_filt = df_filt.drop_duplicates(subset=['protein1', 'protein2', 'composition1'])
+    
+    # Reshape so each GIN group appears once per row (melt gin1 and gin2)
+    # For each row, both gin1 and gin2 contribute to the demixing outcome
+    df1 = df_filt[['gin1', 'demixing_composition']].rename(columns={'gin1': 'gin'})
+    df2 = df_filt[['gin2', 'demixing_composition']].rename(columns={'gin2': 'gin'})
+    df_long = pd.concat([df1, df2], ignore_index=True)
+    df_long['gin'] = df_long['gin'].astype(int)
+    
+    # Group by individual GIN and compute statistics
+    stats = df_long.groupby('gin')['demixing_composition'].agg(['median', 'count'])
+    stats = stats.sort_values('median').head(10)
+    
+    print("\n" + "="*60)
+    print("Top 10 GIN Groups with LOWEST Median Demixing Index")
+    print("(across all pairs involving each GIN group)")
+    print("="*60)
+    print(f"{'GIN Group':<12} {'Median':<12} {'N Samples':<10}")
+    print("-"*60)
+    for gin, row in stats.iterrows():
+        print(f"{gin:<12} {row['median']:<12.4f} {int(row['count']):<10}")
+    print("="*60 + "\n")
+    
+    # Second table: Interaction type groups (C-C, C-H, C-P, H-H, H-P, P-P)
+    stats_interaction = df_filt.groupby('interaction_type')['demixing_composition'].agg(['median', 'count'])
+    stats_interaction = stats_interaction.sort_values('median')
+    
+    print("="*60)
+    print("Median Demixing Index by Interaction Type")
+    print("(C=Charged, H=Hydrophobic, P=Polar)")
+    print("="*60)
+    print(f"{'Interaction':<15} {'Median':<12} {'N Samples':<10}")
+    print("-"*60)
+    for interaction, row in stats_interaction.iterrows():
+        print(f"{interaction:<15} {row['median']:<12.4f} {int(row['count']):<10}")
+    print("="*60 + "\n")
+
 def create_figure3():
     df = load_data()
     model_data = train_elastic_net(df)
@@ -288,4 +334,5 @@ def create_figure3():
     print("Figure 3 saved as Figure3.pdf")
 
 if __name__ == '__main__':
+    analyze_gin_demixing()
     create_figure3()
