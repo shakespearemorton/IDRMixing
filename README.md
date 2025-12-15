@@ -5,7 +5,7 @@
 
 This repository contains the code and data for reproducing the results in:
 
-> **[Measuring (de)Mixing of Disordered Proteins through Domain Decomposition](https://doi.org/PLACEHOLDER)**  
+> **[Quantifying (de)Mixing of Disordered Proteins in Molecular Dynamics Simulations](https://doi.org/PLACEHOLDER)**  
 > William Morton & Robert Vácha  
 > *Journal Name*, 2025
 
