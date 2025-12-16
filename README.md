@@ -1,13 +1,12 @@
 # Measuring (de)Mixing of Disordered Proteins through Domain Decomposition
 
-[![Paper](https://img.shields.io/badge/Paper-Link-blue)](https://doi.org/PLACEHOLDER)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Paper](https://img.shields.io/badge/Paper-Link-blue)](https://www.biorxiv.org/content/10.64898/2025.12.12.694022v1)
 
 This repository contains the code and data for reproducing the results in:
 
-> **[Quantifying (de)Mixing of Disordered Proteins in Molecular Dynamics Simulations](https://doi.org/PLACEHOLDER)**  
+> **[Quantifying (de)Mixing of Disordered Proteins in Molecular Dynamics Simulations]()**  
 > William Morton & Robert Vácha  
-> *Journal Name*, 2025
+> *BioRxiv*, 2025
 
 ## Overview
 
@@ -95,13 +94,18 @@ localcider   # for sequence feature calculation
 If you use this code or data, please cite:
 
 ```bibtex
-@article{morton2025mixing,
-  title={Measuring (de)Mixing of Disordered Proteins through Domain Decomposition},
-  author={Morton, William and V{\'a}cha, Robert},
-  journal={},
-  year={2025},
-  doi={PLACEHOLDER}
+@article {MortonMixing,
+	author = {Morton, William S and Vacha, Robert},
+	title = {Quantifying (de)Mixing of Disordered Proteins in Molecular Dynamics Simulations},
+	elocation-id = {2025.12.12.694022},
+	year = {2025},
+	doi = {10.64898/2025.12.12.694022},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2025/12/15/2025.12.12.694022},
+	eprint = {https://www.biorxiv.org/content/early/2025/12/15/2025.12.12.694022.full.pdf},
+	journal = {bioRxiv}
 }
+
 ```
 
 ## Related Resources
@@ -110,9 +114,6 @@ If you use this code or data, please cite:
 - [von Bülow et al. Dataset](https://github.com/KULL-Centre/_2024_buelow_PSpred)
 - [IDRome Database](https://github.com/KULL-Centre/_2023_Tesei_IDRome)
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
